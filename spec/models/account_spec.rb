@@ -236,6 +236,12 @@ RSpec.describe Account, type: :model do
         end
       end
 
+      context "when copied spec context" do
+        it "returns false copy spec" do
+          expect(account.friend_request_received?(friend)).to be false
+        end
+      end
+
       context "when the account has received a friend request" do
         let_it_be(:friend_request) { create(:friend_request, account:, friend:) }
 
