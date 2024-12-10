@@ -69,6 +69,17 @@ RSpec.describe Friendship, type: :model do
     end
   end
 
+  context "when friendship created" do
+    let(:account) { create(:account) }
+    let(:friend) { create(:account) }
+
+    it "creates  relationship" do
+      expect { create(:friendship, account:, friend:) }.to change(described_class, :count).by(2)
+      expect(account.friends).to include(friend)
+      expect(friend.friends).to include(account)
+    end
+  end
+
   context "when friendship is destroyed" do
     let(:account) { create(:account) }
     let(:friend) { create(:account) }
